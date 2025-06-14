@@ -1,0 +1,82 @@
+Create a full-stack BarkChainAI web app with the following structure and features:
+
+🔷 General Setup:
+- Use HTML, CSS, and JavaScript
+- Create four pages: `index.html`, `arena.html`, `barkmatch.html`, `halloffame.html`
+- Create `style.css` for responsive styles (mobile-first)
+- Create `script.js` with shared logic, Supabase integration, and routing
+- Use real Supabase backend (credentials below)
+- Connect to GitHub and enable Netlify deployment via Replit's Tools
+
+🌐 index.html (Splash Page):
+- Display BarkChainAI logo
+- Tagline: "Where memes, machines, and momentum meet."
+- Intro text block:
+  > BarkChainAI is a Solana-based meme token powered by community energy and a vision for utility-driven growth. We started as a playful fusion of AI and meme culture, but we’re building toward something more: a fun, interactive token with real use cases on the horizon...
+- Buttons (link to pages or external):
+  - "🪙 Check Mint" (link to Solana Explorer with token ID: `12pq6kN7Q2ENQBPvxPugK1A74yuianR8SWhNogZvCzKn`)
+  - "🎁 Claim Airdrop" (link to: https://docs.google.com/forms/d/1nRmCXgLXQSRv2af70oxPbRSTnI6VXPh16s5NkzcurzA/viewform)
+  - "🖼️ Meme Arena" → `arena.html`
+  - "💥 BarkMatch" → `barkmatch.html`
+  - "🏆 Hall of Fame" → `halloffame.html`
+  - "🔗 Follow Us on X" → https://x.com/BarkChainAI
+  - "🛠️ Telegram (Coming Soon)"
+- Add disclaimer footer
+
+🖼️ arena.html (Meme Arena):
+- Pull memes from Supabase `memes` table
+- Display meme cards with image, uploader, and ❤️ vote button
+- Use Supabase `votes` table to track votes
+- Sort by most votes
+- Each meme has social share buttons (X, Telegram)
+
+⚔️ barkmatch.html (BarkMatch Duels):
+- Show two random memes side-by-side
+- User picks a winner
+- Update ELO scores in Supabase `memes` table
+- Record votes in `matchups` table
+- After 10+ wins, memes appear in Meme Arena
+- Use localStorage to limit 1 vote per matchup
+
+🏆 halloffame.html:
+- Weekly, pull top meme by vote count or ELO
+- Display as winner with badge and username
+- Clear rest of memes from arena
+- Reset votes and ELOs
+- Logic triggered every 7 days using JS timer (simulate cron)
+- Winner is marked `is_winner = true` in Supabase
+
+💾 Supabase Backend Integration:
+Use this Supabase project:
+- URL: `https://imqlvfpwondrhfpndqso.supabase.co`
+- Public API Key:  
+`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltcWx2ZnB3b25kcmhmcG5kcXNvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk3NTgwNjgsImV4cCI6MjA2NTMzNDA2OH0.LFla0AATQetjfJcZveg1TJWpuiDGQfmYApx8EHBIkW8`
+
+Create these Supabase tables:
+- `memes`: id, image_url, uploader_handle, elo_score, vote_count, is_winner
+- `votes`: id, meme_id, user_id, timestamp
+- `matchups`: id, meme_a, meme_b, winner_id, user_id, timestamp
+
+✨ JavaScript Features (in script.js):
+- Fetch memes from Supabase and populate arena
+- Handle voting and update vote count live
+- BarkMatch ELO logic: 
+  - Winner +30, Loser -20
+- Share buttons for each meme
+- Weekly reset timer logic with JS `setInterval`
+- Store votes in localStorage to prevent spam
+
+🎨 style.css:
+- Use gradient background (blue/purple)
+- Card-style meme layout
+- Sticky nav bar on all pages
+- Responsive mobile layout with clean fonts
+
+📁 Final Output:
+- `/index.html` = Splash Page
+- `/arena.html` = Meme Arena
+- `/barkmatch.html` = Meme Battles
+- `/halloffame.html` = Weekly Winner
+- `/style.css` = Full styling
+- `/script.js` = Backend logic, frontend handling
+- Include all relevant meta tags and favicon placeholder
